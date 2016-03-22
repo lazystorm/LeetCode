@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> ret;
+        set<int> shadowNums(nums.begin(), nums.end());
+        stack<int> ns;
+        for(auto &n : shadowNums){
+            if(shadowNums.find(target - n)!=shadowNums.end()){
+                ns.push(n);
+            }
+        }
+        while(!ns.empty()){
+            int i = ns.top();
+            ns.pop();
+            ret.clear();
+            for(int k = 0;k != nums.size(); ++k){
+                if(nums[k] == i||nums[k] == target - i)
+                    ret.push_back(k + 1);
+            }
+            if(ret.size()==2)
+                return ret;
+        }
+    }
+};
